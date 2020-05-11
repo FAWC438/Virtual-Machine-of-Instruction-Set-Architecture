@@ -1,0 +1,21 @@
+.main
+# rbx, rcx用来存动态规划状态压缩后的两个数
+irmov 0x1, rbx 	# f_1
+irmov 0x1, rcx 	# f_2
+irmov 0x7, rax 	# 求斐波那契数列第7项
+irmov 0x3, rdx 	# 迭代的i
+irmov 0x1000,r8	# 初始写入地址 
+
+.loop
+cmp rdx, rax
+jl xxx 			# i > n 跳出循环
+rrmov rcx, r14 
+add rbx, rcx 		# fn = f_(n - 1) + f_(n - 2)
+rmmov rcx, inr(r8) 	# 结果存放位置
+inc r8			# 每次存放的地址自增1
+rrmov r14, rbx
+inc rdx
+jmp .loop
+
+.xxx
+halt

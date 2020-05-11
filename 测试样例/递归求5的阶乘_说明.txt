@@ -1,0 +1,32 @@
+.main                   #rbx用于运算时临时储存立即数，被调用者保护；r14用于跳转/调用，没写保护
+irmov 0x5, rdi          #参数为5
+irmov .fact, r14
+call r14
+rmmov rax, dir(0x1000)  #结果存放位置
+halt
+
+.fact
+push rbx
+irmov 0x8, rbx
+sub rbx, rsp
+irmov 0x0, rbx
+cmp rbx, rdi 
+irmov .L2, r14
+je r14	#if(rdi == 0)
+push rdi
+irmov 0x1, rbx
+sub rbx, rdi
+irmov .fact, r14
+call r14
+pop rdi
+imul rdi, rax
+irmov .L3, r14
+jmp r14
+
+.L2
+irmov 0x1, rax
+.L3
+irmov 0x8, rbx
+add rbx, rsp
+pop rbx
+ret

@@ -1,0 +1,28 @@
+irmov 0x5, rdi
+irmov 0x6, r14
+call r14
+rmmov rax, dir(0x1000)
+halt
+
+push rbx
+irmov 0x8, rbx
+sub rbx, rsp
+irmov 0x0, rbx
+cmp rbx, rdi
+irmov 0x17, r14 
+je r14
+push rdi
+irmov 0x1, rbx
+sub rbx, rdi
+irmov 0x6, r14
+call r14
+pop rdi
+imul rdi, rax
+irmov 0x18, r14
+jmp r14
+
+irmov 0x1, rax
+irmov 0x8, rbx
+add rbx, rsp
+pop rbx
+ret

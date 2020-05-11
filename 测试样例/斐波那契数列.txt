@@ -1,0 +1,17 @@
+irmov 0x1,rbx
+irmov 0x1,rcx
+irmov 0x7,rax
+irmov 0x3,rdx
+irmov 0x1000,r8
+cmp rdx,rax
+irmov 0x10,r14
+jl r14
+rrmov rcx,r14
+add rbx,rcx
+rmmov rcx,reg(r8)
+inc r8
+rrmov r14,rbx
+inc rdx
+irmov 0x5,r14
+jmp r14
+halt

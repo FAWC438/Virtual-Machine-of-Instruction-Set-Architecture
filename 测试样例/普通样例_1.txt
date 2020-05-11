@@ -1,0 +1,17 @@
+irmov 0x1,rcx
+push rcx
+irmov 0x8,rdx
+sub rdx,rsp
+nop
+irmov 0x8,rdx
+add rdx,rsp
+pop rax
+mrmov dir(0x3),rdx
+rmmov rdx,dir(0xfff)
+nop
+halt
+
+
+
+
+0x1234
